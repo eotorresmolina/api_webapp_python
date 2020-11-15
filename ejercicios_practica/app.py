@@ -90,10 +90,15 @@ def reset():
 def personas():
     try:
         # Alumno: Implemente
+        """
         result = '''<h3>Alumno: Implementar la llamada
                     al HTML tabla.html
                     con render_template</h3>'''
         return result
+        """
+
+        return render_template('tabla.html')
+
     except:
         return jsonify({'trace': traceback.format_exc()})
 
@@ -124,7 +129,10 @@ def comparativa():
         return (result)
         """
 
-        nationality = str(request.args.get('nationality'))
+        nationality = request.args.get('nacionalidad')
+        if nationality is not None:
+            nationality = str(request.args.get('nacionalidad'))
+            
         ages = persona.age_report(nationality)
 
         fig, ax = plt.subplots(figsize=(16, 9)) 
