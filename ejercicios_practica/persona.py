@@ -9,8 +9,8 @@ Descripcion:
 Programa creado para administrar la base de datos de registro de personas
 '''
 
-__author__ = "Inove Coding School"
-__email__ = "alumnos@inove.com.ar"
+__author__ = "Torres Molina Emmanuel"
+__email__ = "emmaotm@gmail.com"
 __version__ = "1.1"
 
 import os

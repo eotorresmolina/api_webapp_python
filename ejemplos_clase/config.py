@@ -9,8 +9,8 @@ Descripcion:
 Este programa fue creado para leer archivos de configuracion
 '''
 
-__author__ = "Inove Coding School"
-__email__ = "alumnos@inove.com.ar"
+__author__ = "Torres Molina Emmanuel"
+__email__ = "emmaotm@gmail.com"
 __version__ = "1.1"
 
 from configparser import ConfigParser
