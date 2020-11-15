@@ -111,16 +111,36 @@ def personas_tabla():
 def comparativa():
     try:
         # Mostrar todos los registros en un gráfico
+        """
         result = '''<h3>Implementar una función en persona.py
                     que se llame "age_report"</h3>'''
-        result += '''<h3>Esa funcion debe devolver los datos
-                    de todas las edades ingresadas e realizar
+        result += '''<h3>Esa función debe devolver los datos
+                    de todas las edades ingresadas y realizar
                     un gráfico "plot" para mostrar en el HTMl</h3>'''
         result += '''<h3>Bonus track: puede hacer que esta endpoint reciba
                     como parámetro estático o dinámico que indique la nacionalidad
                     que se desea estudiar sus edades ingresadas (filtrar las edades
                     por la nacionalidad ingresada)</h3>'''
         return (result)
+        """
+
+        nationality = str(request.args.get('nationality'))
+        ages = persona.age_report(nationality)
+
+        fig, ax = plt.subplots(figsize=(16, 9)) 
+        ax.set_title('Gráfico de Edades', fontsize=16)
+        ax.plot(range(0, len(ages)), ages, color='darkred')
+        ax.set_xlabel('People', fontsize=18)
+        ax.set_ylabel('Ages', fontsize=18)
+        plt.grid(True)
+        ax.get_xaxis().set_visible(False)
+        
+        output = io.BytesIO()
+        FigureCanvas(fig).print_png(output)
+        plt.close(fig)    
+
+        return Response(output.getvalue(), mimetype='image/png')
+
     except:
         return jsonify({'trace': traceback.format_exc()})
 
@@ -141,6 +161,16 @@ def registro():
             # age = ...
             # nationality = ...
             # persona.insert(name, int(age), nationality)
+
+            name = str(request.form.get('name'))
+            age = str(request.form.get('age'))
+            nationality = str(request.form.get('nationality'))
+
+            if (name is None or age is None or age.isdigit() is False or nationality is None ):
+                return Response(status=400)
+
+            persona.insert(name, int(age), nationality)
+
             return Response(status=200)
         except:
             return jsonify({'trace': traceback.format_exc()})
