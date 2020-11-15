@@ -87,3 +87,34 @@ def report(limit=0, offset=0):
     # Cerrar la conexión con la base de datos
     conn.close()
     return query_results
+
+
+def age_nationality(nationality):
+    conn = sqlite3.connect(db['database'])
+    c = conn.cursor()
+
+    c.execute("""
+                SELECT name, age, nationality
+                FROM persona
+                WHERE nationality = ?;
+            """, (nationality, ))
+
+    query_result = c.fetchall()
+
+    conn.close()
+    return query_result
+
+
+def age_report(nationality=None):
+    '''
+    Función que Devuelve las Edades Ingresadas.
+    '''
+
+    if nationality is not None: 
+        data = age_nationality(nationality)
+        data_filter = [int(element[1]) for element in data]
+    else:
+        data = report()
+        data_filter = [row.get('age') for row in data]   
+
+    return data_filter
