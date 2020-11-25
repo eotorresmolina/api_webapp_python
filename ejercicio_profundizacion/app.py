@@ -47,6 +47,24 @@ def index():
         jsonify({'trace': traceback.format_exc()})
 
 
+@app.route(endpoints['reset'])
+def reset():
+    try:
+        # Creamos la DB:
+        insight.create_schema()
+
+        # Cargamos la DB:
+        insight.fill(table='temperature')
+        insight.fill(table='pressure')
+
+        result = '<h2>Base de Datos Cargada!!</h2>'
+        return result
+
+    except:
+        return jsonify({'trace': traceback.format_exc()})
+
+
+
 @app.route(endpoints['graph_temperat'])
 def graph_temperat():
     try:
@@ -118,7 +136,7 @@ def table_pressure():
     except:
         return jsonify({'trace': traceback.format_exc()})
     
-    
+
 
 if __name__ == "__main__":
     # Creamos la DB:
