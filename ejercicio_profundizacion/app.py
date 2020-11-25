@@ -57,7 +57,7 @@ def reset():
         insight.fill(table='temperature')
         insight.fill(table='pressure')
 
-        result = '<h2>Base de Datos Cargada!!</h2>'
+        result = '<h2>Base de Datos Creada y Cargada!!</h2>'
         return result
 
     except:
@@ -139,13 +139,6 @@ def table_pressure():
 
 
 if __name__ == "__main__":
-    # Creamos la DB:
-    insight.create_schema()
-
-    # Cargamos la DB:
-    insight.fill(table='temperature')
-    insight.fill(table='pressure')
-
     #Corremos el Server:
     app.run(host=server['host'],
             port=server['port'],
