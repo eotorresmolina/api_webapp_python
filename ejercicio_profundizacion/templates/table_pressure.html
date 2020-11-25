@@ -1,0 +1,17 @@
+<html>
+    <table class="egt" border="1">
+        <caption>Mars InSight Weather</caption>
+        <thead cellpadding="1.0" cellspacing="1.0">
+            <tr>
+                <th>Number of days (or sols, on Mars)</th>
+                <th>Average Atmospheric Pressure [Pa]</th>
+            </tr>
+            {% for x, y in row %}
+                <tr>
+                    <td>{{x}}</td>
+                    <td>{{y}}</td>
+                </tr>
+            {% endfor %}
+        </thead cellpadding="0" cellspacing="0">
+    </table>
+</html>
